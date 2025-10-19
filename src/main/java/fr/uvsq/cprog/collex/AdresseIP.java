@@ -61,7 +61,6 @@ public class AdresseIP implements Comparable<AdresseIP> {
         return this.valeur.equals(autre.valeur);
     }
 
-    /** Nécessaire pour stocker dans les collections (HashMap, Set, etc.). */
     @Override
     public int hashCode() {
         return valeur.hashCode();
