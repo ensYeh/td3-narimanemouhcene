@@ -3,7 +3,6 @@ package fr.uvsq.cprog.collex;
 import fr.uvsq.cprog.collex.commande.*;
 
 import java.io.IOException;
-import java.util.List;
 
 public class DnsApp {
 
@@ -35,6 +34,19 @@ public class DnsApp {
                 return new AddCommande(dns, tui, parts[1], parts[2]);
             } else {
                 tui.affiche("ERREUR : Syntaxe incorrecte pour add !");
+                return null;
+            }
+        } else if (ligne.startsWith("ls ")) {
+            // format : ls domaine ou ls -a domaine
+            String[] parts = ligne.split(" ");
+            if (parts.length == 2) {
+                String domaine = parts[1];
+                return new ListeDomaineCommande(new DnsService()); // tri par nom
+            } else if (parts.length == 3 && parts[1].equals("-a")) {
+                String domaine = parts[2];
+                return new ListeDomaineParIpCommande(dns, tui, domaine); // tri par IP
+            } else {
+                tui.affiche("ERREUR : Syntaxe incorrecte pour ls !");
                 return null;
             }
         } else if (ligne.matches("([0-9]{1,3}\\.){3}[0-9]{1,3}")) {
