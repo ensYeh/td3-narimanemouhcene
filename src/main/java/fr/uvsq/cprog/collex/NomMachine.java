@@ -1,3 +1,4 @@
+package fr.uvsq.cprog.collex;
 public class NomMachine {
     private String valeur; // le nom complet de la machine
 
